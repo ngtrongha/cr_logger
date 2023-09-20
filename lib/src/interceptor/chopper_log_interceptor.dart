@@ -5,25 +5,8 @@ import 'package:chopper/chopper.dart';
 import 'package:cr_logger/cr_logger.dart';
 import 'package:http/http.dart' as http;
 
-class ChopperLogInterceptor extends ResponseInterceptor
-    with RequestInterceptor {
+class ChopperResponseInterceptor implements ResponseInterceptor {
   final logManager = HttpLogManager.instance;
-
-  @override
-  FutureOr<Request> onRequest(Request request) async {
-    final reqOpt = RequestBean()
-      ..id = _getRequestHashCode(await request.toBaseRequest())
-      ..url = request.url.toString()
-      ..method = request.method
-      ..contentType = request.headers['Content-Type'].toString()
-      ..requestTime = DateTime.now()
-      ..params = request.parameters
-      ..body = request.body
-      ..headers = request.headers;
-    logManager.onRequest(reqOpt);
-
-    return request;
-  }
 
   @override
   FutureOr<Response> onResponse(Response<dynamic> response) {
@@ -75,6 +58,45 @@ class ChopperLogInterceptor extends ResponseInterceptor
     }
 
     return response;
+  }
+
+  /// Creates hashcode based on request
+  int _getRequestHashCode(http.BaseRequest baseRequest) {
+    var hashCodeSum = 0;
+
+    hashCodeSum += baseRequest.url.hashCode;
+    hashCodeSum += baseRequest.method.hashCode;
+    if (baseRequest.headers.isNotEmpty) {
+      baseRequest.headers.forEach((key, value) {
+        hashCodeSum += key.hashCode;
+        hashCodeSum += value.hashCode;
+      });
+    }
+    if (baseRequest.contentLength != null) {
+      hashCodeSum += baseRequest.contentLength.hashCode;
+    }
+
+    return hashCodeSum.hashCode;
+  }
+}
+
+class ChopperRequestInterceptor implements RequestInterceptor {
+  final logManager = HttpLogManager.instance;
+
+  @override
+  FutureOr<Request> onRequest(Request request) async {
+    final reqOpt = RequestBean()
+      ..id = _getRequestHashCode(await request.toBaseRequest())
+      ..url = request.url.toString()
+      ..method = request.method
+      ..contentType = request.headers['Content-Type'].toString()
+      ..requestTime = DateTime.now()
+      ..params = request.parameters
+      ..body = request.body
+      ..headers = request.headers;
+    logManager.onRequest(reqOpt);
+
+    return request;
   }
 
   /// Creates hashcode based on request

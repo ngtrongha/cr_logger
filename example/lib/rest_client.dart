@@ -16,7 +16,8 @@ class RestClient {
       CRLoggerInitializer.instance.getDioInterceptor(),
     );
     chopper = ChopperClient(interceptors: [
-      CRLoggerInitializer.instance.getChopperInterceptor(),
+      CRLoggerInitializer.instance.getChopperRequestInterceptor(),
+      CRLoggerInitializer.instance.getChopperResponseInterceptor(),
     ]);
   }
 
@@ -36,8 +37,8 @@ class RestClient {
         'PROXY localhost:$port; DIRECT';
     final adapter = dio.httpClientAdapter;
     if (adapter is IOHttpClientAdapter) {
-      adapter.onHttpClientCreate = (HttpClient client) {
-        client
+      adapter.createHttpClient = () {
+        final client = HttpClient()
           ..findProxy = (uri) {
             return proxyStr;
           }
@@ -47,8 +48,7 @@ class RestClient {
             int port,
           ) =>
               true;
-
-        return null;
+        return client;
       };
     }
   }

@@ -14,7 +14,7 @@ class DioLogInterceptor implements Interceptor {
 
   @override
   void onError(
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) {
     dynamic json;

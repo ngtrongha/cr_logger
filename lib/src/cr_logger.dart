@@ -268,8 +268,12 @@ class CRLoggerInitializer {
   }
 
   /// Get Chopper interceptor which should be applied to Chopper instance.
-  ChopperLogInterceptor getChopperInterceptor() {
-    return ChopperLogInterceptor();
+  ChopperRequestInterceptor getChopperRequestInterceptor() {
+    return ChopperRequestInterceptor();
+  }
+
+  ChopperResponseInterceptor getChopperResponseInterceptor() {
+    return ChopperResponseInterceptor();
   }
 
   /// Handle request of HttpClient from dart:io library

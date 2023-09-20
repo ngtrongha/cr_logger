@@ -18,8 +18,8 @@ class MobileHeaderWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: const [
+        const Row(
+          children: [
             SizedBox(width: 16),
             Text(
               'Logs',
