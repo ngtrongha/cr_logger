@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.0.0 <4.0.0"
 
 dependencies:
-  chopper: ^7.0.6
+  chopper:
   cr_logger:
     path: ../
   dio: ^5.3.2
