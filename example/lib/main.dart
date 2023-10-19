@@ -284,17 +284,7 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
 
-                                ///TODO Check it later
-                                /// For some reason, the Inspector package cannot
-                                /// get the color if there is a [DropzoneView]
-                                /// on the screen and throws an error
-                                /// (probably due to the flatter)
-                                /// if the [DropzoneView] is not assigned
-                                /// a new key each time.
-                                /// Because of this, frequent rebuilds
-                                /// of the widget and constant firing
-                                /// of callbacks can occur.
-                                /// For this reason, a debouncer is now used to avoid this.
+                              
                                 DropzoneView(
                                   key: UniqueKey(),
                                   operation: DragOperation.move,

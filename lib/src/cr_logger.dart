@@ -37,7 +37,7 @@ class CRLoggerInitializer {
   static CRLoggerInitializer instance = CRLoggerInitializer._();
 
   final _consoleLogOutput = ConsoleLogOutput();
-  final _loggerNavigationKey = GlobalKey<NavigatorState>();
+  late final GlobalKey<NavigatorState> _loggerNavigationKey;
   final _rootBackButtonDispatcher = RootBackButtonDispatcher();
   late final CRHttpClientAdapter _httpClientAdapter;
   late final CRHttpAdapter _httpAdapter;
@@ -118,6 +118,7 @@ class CRLoggerInitializer {
     bool useCrLoggerInReleaseBuild = false,
     bool useDatabase = false,
     ThemeData? theme,
+    GlobalKey<NavigatorState>? loggerNavigationKey,
     Map<Level, Color>? levelColors,
     List<String>? hiddenFields,
     List<String>? hiddenHeaders,
@@ -152,7 +153,7 @@ class CRLoggerInitializer {
     this.logFileName = logFileName ?? this.logFileName;
     this.hiddenFields = hiddenFields ?? [];
     this.hiddenHeaders = hiddenHeaders ?? [];
-
+    _loggerNavigationKey = loggerNavigationKey ?? GlobalKey<NavigatorState>();
     log = logger ??
         Logger(
           printer: PrettyCRPrinter(
@@ -393,7 +394,7 @@ class CRLoggerInitializer {
 
   void _onLoggerOpen(BuildContext context) {
     /// Show logger
-    
+
     if (_loggerEntry == null) {
       final newLoggerEntry = OverlayEntry(
         builder: (context) => MainLogPage(

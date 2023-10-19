@@ -59,7 +59,6 @@ class DioLogInterceptor implements Interceptor {
       ..responseBean = resOpt;
     logManager.onError(errOptions);
 
-    /// TODO
     /// it looks like it's useless code that just duplicates the request
     /// in the console, but we need to make sure it wasn't some kind of crutch
     /// and nothing will break

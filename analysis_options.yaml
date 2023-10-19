@@ -85,7 +85,6 @@ linter:
     - prefer_constructors_over_static_methods # PREFER defining constructors instead of static methods to create instances.
     - prefer_contains # DON'T use indexOf to see if a collection contains an element.
     # - prefer_double_quotes # DO use double quotes where they wouldn't require additional escapes. # Conflicts with better rule prefer_single_quotes.
-    - prefer_equal_for_default_values # DO Use = to separate a named parameter from its default value.
     # - prefer_expression_function_bodies # CONSIDER using => for short members whose body is a single return statement. # Some functions are not convenient to use with this.
     - prefer_final_fields # DO prefer declaring private fields as final if they are not reassigned later in the class.
     - prefer_final_in_for_each # DO prefer declaring for-each loop variables as final if they are not reassigned later in the code.
@@ -162,8 +161,7 @@ linter:
     # - diagnostic_describe_all_properties # DO reference all public properties in debug method implementations. # We don't use this
     - empty_statements # AVOID empty statements.
     - hash_and_equals # DO override hashCode if overriding == and prefer overriding == if overriding hashCode.
-    - iterable_contains_unrelated_type # DON'T invoke contains on Iterable with an instance of different type than the parameter type.
-    - list_remove_unrelated_type # DON'T invoke remove on List with an instance of different type than the parameter type.
+    - collection_methods_unrelated_type # DON'T invoke contains on Iterable with an instance of different type than the parameter type.
     - literal_only_boolean_expressions # DON'T test for conditions composed only by literals, since the value can be inferred at compile time.
     - no_adjacent_strings_in_list # DON'T use adjacent strings in list.
     - no_duplicate_case_values # DON'T use more than one case with same value.
