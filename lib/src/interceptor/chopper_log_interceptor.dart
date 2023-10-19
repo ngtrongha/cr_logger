@@ -16,8 +16,8 @@ class ChopperResponseInterceptor implements ResponseInterceptor {
     } catch (error, stackTrace) {
       log.e(
         'Chopper interceptor error',
-        error,
-        stackTrace,
+        error: error,
+        stackTrace: stackTrace,
       );
     }
 

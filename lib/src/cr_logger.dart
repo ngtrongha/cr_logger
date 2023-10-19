@@ -168,7 +168,7 @@ class CRLoggerInitializer {
           filter: useCrLoggerInReleaseBuild
               ? ProductionFilter()
               : DevelopmentFilter(),
-          level: Level.verbose,
+          level: Level.trace,
         );
 
     _rootBackButtonDispatcher.addCallback(_dispatchBackButton);
@@ -393,6 +393,7 @@ class CRLoggerInitializer {
 
   void _onLoggerOpen(BuildContext context) {
     /// Show logger
+    
     if (_loggerEntry == null) {
       final newLoggerEntry = OverlayEntry(
         builder: (context) => MainLogPage(
