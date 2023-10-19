@@ -72,6 +72,7 @@ class _MainLogPageState extends State<MainLogPage> {
           onLoggerClose: widget.onLoggerClose,
         ),
       ),
+      maintainState: false,
       settings: settings,
     );
   }
