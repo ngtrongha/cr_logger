@@ -61,8 +61,10 @@ class PrettyCRLogger {
           _printRequest(requestBean);
         }
       } else {
-        await workerManager.execute(
-            () => isolatePrintRequest(requestBean..adaptForIsolatePrinting()));
+        await Executor().execute(
+          fun1: isolatePrintRequest,
+          arg1: requestBean..adaptForIsolatePrinting(),
+        );
       }
     });
   }
@@ -84,7 +86,10 @@ class PrettyCRLogger {
           _printError(errorBean);
         }
       } else {
-        await workerManager.execute(() => isolatePrintError(errorBean));
+        await Executor().execute(
+          fun1: isolatePrintError,
+          arg1: errorBean,
+        );
       }
     });
   }
@@ -106,12 +111,15 @@ class PrettyCRLogger {
           _printResponse(responseBean);
         }
       } else {
-        await workerManager.execute(() => isolatePrintResponse(responseBean));
+        await Executor().execute(
+          fun1: isolatePrintResponse,
+          arg1: responseBean,
+        );
       }
     });
   }
 
-  Future<Object> isolatePrintRequest(dynamic requestBean) async {
+  Future<Object> isolatePrintRequest(dynamic requestBean, _) async {
     _printRequest(requestBean);
     // Return some result needed for pakage worker_manager.
     // If no result isolate job will crash when getting Null object in response
@@ -120,7 +128,7 @@ class PrettyCRLogger {
     return '';
   }
 
-  Future<Object> isolatePrintResponse(dynamic responseBean) async {
+  Future<Object> isolatePrintResponse(dynamic responseBean, _) async {
     _printResponse(responseBean);
     // Return some result needed for pakage worker_manager.
     // If no result isolate job will crash when getting Null object in response
@@ -199,7 +207,7 @@ class PrettyCRLogger {
   }
 }
 
-Future<Object> isolatePrintError(dynamic errorBean) async {
+Future<Object> isolatePrintError(dynamic errorBean, _) async {
   _printError(errorBean);
 
   // Return some result needed for pakage worker_manager.

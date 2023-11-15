@@ -32,7 +32,7 @@ dependencies:
   sqflite: ^2.2.0+3
   synchronized: ^3.0.0
   uuid: null
-  worker_manager: 
+  worker_manager: ^5.0.3
 
 dev_dependencies:
   build_runner: ^2.2.0

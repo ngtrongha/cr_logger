@@ -29,7 +29,7 @@ class ConsoleLogOutput extends LogOutput {
           event.lines.forEach(print);
         }
       } else {
-        await workerManager.execute(() => isolatePrintLog(event.lines));
+        await Executor().execute(fun1: isolatePrintLog, arg1: event.lines);
       }
     });
   }
@@ -44,7 +44,7 @@ class ConsoleLogOutput extends LogOutput {
   }
 }
 
-Object isolatePrintLog(dynamic data) {
+Object isolatePrintLog(dynamic data, _) {
   if (data is List) {
     // ignore: avoid_print
     data.forEach(print);
